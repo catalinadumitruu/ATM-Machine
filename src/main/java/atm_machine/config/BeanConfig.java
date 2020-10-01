@@ -15,7 +15,7 @@ public class BeanConfig {
     public DataSource dataSource() {
         final MysqlDataSource dataSource = new MysqlDataSource();
 
-        dataSource.setUrl("jdbc:mysql://localhost:8080/atm_machine");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/atm_machine");
         dataSource.setUser("root");
         dataSource.setPassword("");
 

@@ -1,5 +1,7 @@
 package atm_machine;
 
+import atm_machine.model.Client;
+import atm_machine.service.BankService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
