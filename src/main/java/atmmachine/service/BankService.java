@@ -1,8 +1,11 @@
 package atmmachine.service;
 
-import atmmachine.DAO.BankDAO;
+import atmmachine.DAO.BankAccountDAO;
+import atmmachine.DAO.ClientDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import atmmachine.model.Client;
+import atmmachine.model.BankAccount;
 
 import java.util.List;
 
@@ -10,23 +13,39 @@ import java.util.List;
 public class BankService<T> {
 
     @Autowired
-    private BankDAO<T> repository;
+    private ClientDAO clientDAO;
+
+    @Autowired
+    private BankAccountDAO accountDAO;
 
 
-    public T saveItem(T item) {
-        return repository.save(item);
+    public Client saveClient(Client item) {
+        return clientDAO.save(item);
     }
 
-    public List<T> getItems() {
-        return repository.findAll();
+    public List<Client> getClients() {
+        return clientDAO.findAll();
     }
 
-    public T getItemsById(int id) {
-        return repository.findById(id).orElse(null);
+    public Client getClientsById(int id) {
+        return clientDAO.findById(id).orElse(null);
     }
 
-    public String deleteItem(int id) {
-        repository.deleteById(id);
+    public String deleteClient(int id) {
+        clientDAO.deleteById(id);
         return "Deleted client with id " + id;
+    }
+
+    public List<BankAccount> getAccounts() {
+        return accountDAO.findAll();
+    }
+
+    public String deleteAccounts(int id) {
+        accountDAO.deleteById(id);
+        return "Account deleted. Id: " + id;
+    }
+
+    public int checKPIN(int pin) {
+        return accountDAO.checkPINExistance(pin);
     }
 }

@@ -13,7 +13,8 @@ import javax.persistence.*;
 @Table(name = "accounts")
 public class BankAccount {
     @Id
-    private int clientId;
+    @GeneratedValue
+    private int accountId;
 
     @Column(name = "IBAN")
     private String IBAN;
@@ -22,7 +23,7 @@ public class BankAccount {
     @Column(name = "amount")
     private Double amount;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "clientId", referencedColumnName = "clientId")
     private Client client;
 }
