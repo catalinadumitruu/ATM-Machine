@@ -18,7 +18,6 @@ public class BankService<T> {
     @Autowired
     private BankAccountDAO accountDAO;
 
-
     public Client saveClient(Client item) {
         return clientDAO.save(item);
     }
@@ -47,5 +46,15 @@ public class BankService<T> {
 
     public int checKPIN(int pin) {
         return accountDAO.checkPINExistance(pin);
+    }
+
+    public double getAmount(int pin) { return accountDAO.getAmount(pin); }
+
+    public boolean checkAmount(Double amount, int pin) {
+        return accountDAO.getAmount(pin) >= amount;
+    }
+
+    public void updateAccount(int pin, Double amount) {
+        accountDAO.updateAmount(amount, pin);
     }
 }

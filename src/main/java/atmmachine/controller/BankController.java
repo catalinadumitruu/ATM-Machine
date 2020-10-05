@@ -21,6 +21,8 @@ public class BankController {
         this.accountService = accountService;
     }
 
+    // basic functions with the classes
+
     @PostMapping("/clients/add")
     public Client addClient(@RequestBody Client client) {
         return clientService.saveClient(client);
@@ -51,11 +53,6 @@ public class BankController {
         return accountService.deleteAccounts(id);
     }
 
-//    @GetMapping("/accounts/checkPin/{pin}")
-//    public int checkPin(@PathVariable int pin) {
-//        return accountService.checKPIN(pin);
-//    }
-
     @GetMapping("/start")
     public String start(){
         return "Te rog introdu PIN-ul";
@@ -71,6 +68,51 @@ public class BankController {
             }
         } else {
             return "Please insert a valid PIN (it should contain only numbers).";
+        }
+    }
+
+    @GetMapping("/balanceinquiry/{pin}")
+    public String balanceInquiry(@PathVariable String pin) {
+        if(pin.matches("[0-9]+") && pin.length() == 4) {
+            if (accountService.checKPIN(Integer.parseInt(pin)) >= 1) {
+                return "Available amount is " + accountService.getAmount(Integer.parseInt(pin));
+            } else {
+                return "Client was not found";
+            }
+        } else {
+            return "Client's PIN is not in a valid form.";
+        }
+    }
+
+    @PostMapping("/accounts/{pin}/withdrawal/{amount}")
+    public String withdrawal(@PathVariable String pin,@PathVariable Double amount) {
+        if(pin.matches("[0-9]+") && pin.length() == 4) {
+            if (accountService.checKPIN(Integer.parseInt(pin)) >= 1) {
+                if(accountService.checkAmount(amount, Integer.parseInt(pin))) {
+                    accountService.updateAccount(Integer.parseInt(pin), accountService.getAmount(Integer.parseInt(pin)) - amount);
+                    return "Withdrawal done! Current available sum is " + accountService.getAmount(Integer.parseInt(pin));
+                } else {
+                    return "Withdrawal cannot be terminated. Your account doesn't have enough money";
+                }
+            } else {
+                return "Client was not found";
+            }
+        } else {
+            return "Client's PIN is not in a valid form.";
+        }
+    }
+
+    @PostMapping("/accounts/{pin}/deposit")
+    public String deposit(@PathVariable String pin, @RequestBody Double amount) {
+        if(pin.matches("[0-9]+") && pin.length() == 4) {
+            if (accountService.checKPIN(Integer.parseInt(pin)) >= 1) {
+                accountService.updateAccount(Integer.parseInt(pin), accountService.getAmount(Integer.parseInt(pin)) + amount);
+                return "Deposit done. Current available sum is " + accountService.getAmount(Integer.parseInt(pin));
+            } else {
+                return "Client was not found";
+            }
+        } else {
+            return "Client's PIN is not in a valid form.";
         }
     }
 }
