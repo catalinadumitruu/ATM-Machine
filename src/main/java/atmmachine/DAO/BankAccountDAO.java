@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Repository
 public interface BankAccountDAO extends JpaRepository<BankAccount, Integer> {
@@ -19,10 +20,12 @@ public interface BankAccountDAO extends JpaRepository<BankAccount, Integer> {
     double getAmount(@Param("pin") int pin);
 
     @Query(value = "select * from accounts where pin = :pin", nativeQuery = true)
-    BankAccount findByPassword(@Param("pin") int pin);
+    Optional<BankAccount> findByPassword(@Param("pin") int pin);
 
     @Transactional
     @Modifying
     @Query(value = "update accounts set amount = :amount where pin = :pin", nativeQuery = true)
     void updateAmount(@Param("amount") Double amount, @Param("pin") int pin);
+
+    Optional<BankAccount> findByUsername(String username);
 }

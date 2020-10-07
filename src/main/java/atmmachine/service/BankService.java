@@ -50,7 +50,7 @@ public class BankService<T> {
 
     public double getAmount(int pin) { return accountDAO.getAmount(pin); }
 
-    public boolean checkAmount(Double amount, int pin) {
+    public boolean checkAmount(Integer amount, int pin) {
         return accountDAO.getAmount(pin) >= amount;
     }
 

@@ -13,6 +13,7 @@
         <slf4j-simple.version>1.7.30</slf4j-simple.version>
         <slf4j.version>1.7.30</slf4j.version>
         <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
+        <springboot-starter-test>2.3.3.RELEASE</springboot-starter-test>
         <lombok.version>1.18.12</lombok.version>
         <starter-data-jpa>2.3.4.RELEASE</starter-data-jpa>
         <jackson-databind>2.10.3</jackson-databind>
@@ -20,6 +21,8 @@
         <spring-context>5.2.4.RELEASE</spring-context>
         <tomcat>9.0.35</tomcat>
         <security-starter>2.3.4.RELEASE</security-starter>
+        <tomcat-embed-jasper>9.0.36</tomcat-embed-jasper>
+        <servlet-api>4.0.1</servlet-api>
     </properties>
 
     <dependencies>
@@ -29,6 +32,28 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <version>${springboot-starter-test}</version>
+            <scope>test</scope>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.apache.tomcat.embed</groupId>-->
+<!--            <artifactId>tomcat-embed-core</artifactId>-->
+<!--            <version>${tomcat}</version>-->
+<!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <version>${tomcat-embed-jasper}</version>
+        </dependency>
+
 
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
@@ -50,10 +75,13 @@
             <version>${slf4j.version}</version>
         </dependency>
 
+
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
-            <version>${tomcat}</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet-api}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -87,18 +115,19 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>5.4.0</version>
-        </dependency>
 
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security &ndash;&gt;-->
 <!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--            <version>${security-starter}</version>-->
+<!--            <groupId>org.springframework.security</groupId>-->
+<!--            <artifactId>spring-security-core</artifactId>-->
+<!--            <version>5.4.0</version>-->
 <!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>${security-starter}</version>
+        </dependency>
 
     </dependencies>
 
