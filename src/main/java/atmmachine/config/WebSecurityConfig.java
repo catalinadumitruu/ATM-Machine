@@ -30,23 +30,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .csrf()
-//                .disable()
-//                .authorizeRequests()
-//                .antMatchers("/**").hasAnyRole("USER")
-//                .and()
-//                .formLogin().loginPage("/login").defaultSuccessUrl("/home", true)
-//                .failureUrl("/tryagain").permitAll()
-//                .and().logout().logoutSuccessUrl("/login")
-//                ; //successHandler(successfulLogin)
 
         http
-                .authorizeRequests().anyRequest().hasAnyRole("USER")
+                .authorizeRequests()
+                .antMatchers("/login*").permitAll()
+                .antMatchers("/deleteAccount*", "/deleteClient*", "/clients**", "/accounts*", "/bigAccounts").hasRole("ADMIN")
+                .anyRequest().hasAnyRole("USER", "ADMIN")
                 .and()
-                .formLogin().loginPage("/login").defaultSuccessUrl("/home", true)
-                .failureUrl("/tryagain").permitAll()
-                .and().logout().logoutSuccessUrl("/login")
+                .formLogin().loginPage("/login")
+                .successHandler(successfulLogin)
+//                .defaultSuccessUrl("/home")
+//                .successForwardUrl("/home")
+                .failureUrl("/loginFailed")
+                .and()
+                .logout().logoutSuccessUrl("/login")
                 .and()
                 .csrf().disable();
     }

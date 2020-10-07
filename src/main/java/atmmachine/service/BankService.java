@@ -2,10 +2,12 @@ package atmmachine.service;
 
 import atmmachine.DAO.BankAccountDAO;
 import atmmachine.DAO.ClientDAO;
+import atmmachine.model.BankAccount;
+import atmmachine.model.Client;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import atmmachine.model.Client;
-import atmmachine.model.BankAccount;
 
 import java.util.List;
 
@@ -18,34 +20,72 @@ public class BankService<T> {
     @Autowired
     private BankAccountDAO accountDAO;
 
+    static final Logger logger = LoggerFactory.getLogger(BankService.class);
+
     public Client saveClient(Client item) {
-        return clientDAO.save(item);
+
+        try{
+            return clientDAO.save(item);
+        } catch(Exception e) {
+            logger.error("Something went wrong at saving client {}", item.toString());
+            return null;
+        }
     }
 
     public List<Client> getClients() {
-        return clientDAO.findAll();
+
+        try{
+            return clientDAO.findAll();
+        } catch(Exception e) {
+            logger.error("Couldn't get Clients.");
+            return null;
+        }
     }
 
     public Client getClientsById(int id) {
-        return clientDAO.findById(id).orElse(null);
+
+        try{
+            return clientDAO.findById(id).orElse(null);
+        }catch(Exception e) {
+            logger.error("Couldn't get client with id {}", id);
+            return null;
+        }
     }
 
     public String deleteClient(int id) {
-        clientDAO.deleteById(id);
-        return "Deleted client with id " + id;
+
+        try{
+            clientDAO.deleteById(id);
+            return "Deleted client with id " + id;
+        } catch (Exception e) {
+            logger.error("Client with id {} couldn't be delete. Error message: {}", id, e.getMessage());
+            return "Something went wrong. Client was not deleted.";
+        }
     }
 
     public List<BankAccount> getAccounts() {
-        return accountDAO.findAll();
+
+        try{
+            return accountDAO.findAll();
+        } catch (Exception e) {
+            logger.error("Couldn't get accounts");
+            return null;
+        }
     }
 
     public String deleteAccounts(int id) {
-        accountDAO.deleteById(id);
-        return "Account deleted. Id: " + id;
+
+        try{
+            accountDAO.deleteById(id);
+            return "Account deleted. Id: " + id;
+        } catch (Exception e) {
+            logger.error("Account with id {} couldn't be delete. Error message: {}", id, e.getMessage());
+            return "Something went wrong. Account was not deleted.";
+        }
     }
 
-    public int checKPIN(int pin) {
-        return accountDAO.checkPINExistance(pin);
+    public int checkPIN(int pin) {
+        return accountDAO.checkPINExistence(pin);
     }
 
     public double getAmount(int pin) { return accountDAO.getAmount(pin); }
@@ -57,4 +97,6 @@ public class BankService<T> {
     public void updateAccount(int pin, Double amount) {
         accountDAO.updateAmount(amount, pin);
     }
+
+    public int getPin(String username) { return accountDAO.getPin(username); }
 }

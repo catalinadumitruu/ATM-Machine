@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ATM_Machine {
 
     public static void main(String[] args) {
-        SpringApplication.run(ATM_Machine.class);
+        SpringApplication.run(ATM_Machine.class, args);
         System.out.println("ATM loading ...");
     }
 }

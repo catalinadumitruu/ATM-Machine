@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface BankAccountDAO extends JpaRepository<BankAccount, Integer> {
 
     @Query(value = "select count(*) from accounts acc where acc.pin = :pin", nativeQuery = true)
-    int checkPINExistance(@Param("pin") int pin);
+    int checkPINExistence(@Param("pin") int pin);
 
     @Query(value = "select amount from accounts where pin = :pin", nativeQuery = true)
     double getAmount(@Param("pin") int pin);
@@ -28,4 +28,7 @@ public interface BankAccountDAO extends JpaRepository<BankAccount, Integer> {
     void updateAmount(@Param("amount") Double amount, @Param("pin") int pin);
 
     Optional<BankAccount> findByUsername(String username);
+
+    @Query(value = "select pin from accounts where username = :username", nativeQuery = true)
+    public int getPin(@Param("username")String username);
 }
