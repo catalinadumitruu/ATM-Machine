@@ -1,7 +1,7 @@
 # ATM-Machine
 Basic ATM Machine using Spring Boot.
 
-  When I first started developing this app the first steps were analyzing the main functionalities. For visual representation I chose to use an UML behavioral diagram which is represented through **Use Case Diagram**:
+   When I first started developing this app the first steps were analyzing the main functionalities. For visual representation I chose to use an UML behavioral diagram which is represented through **Use Case Diagram**:
 
 ![GitHub Logo](/usecaseDiagram.jpg)
 
