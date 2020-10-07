@@ -5,7 +5,7 @@ Basic ATM Machine using Spring Boot.
 
 ![GitHub Logo](/usecaseDiagram.jpg)
 
-  As it can be seen a client can *login, deposit money, check the available amount of money* or *pull cash out of the account*. These were the basic functionalities I wanted to implement.
+  As it can be seen a client can *login, deposit money, check the available amount of money* or *pull cash out of the account and logout*. These were the basic functionalities I wanted to implement.
 
   After this I started developing a short **Class Diagram** which allowed me to get a bigger picture of the project structure:
 
