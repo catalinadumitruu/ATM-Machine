@@ -13,7 +13,7 @@ Basic ATM Machine using Spring Boot.
 
   I decided to have 3 main classes: **Clients** (for displaying names so things could be more personal), **Accounts** (the main object from our functionalities) and **Roles** (because clients can be **normal users** and have the basic functionalities described above or they can de **admins** and have extra functionalities: deleting accounts, clients, selecting data about them and so on).
   
-  Considering the **database** I used a MySQL server with a pre-populated database. To **map the Java persistent objects to  I used *Hibernate***.
+  Considering the **database** I used a MySQL server with a pre-populated database. To **map the Java persistent objects to the database I used *Hibernate***.
   
   ![GitHub Logo](/Capture.PNG)
   
