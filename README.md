@@ -14,7 +14,8 @@ Basic ATM Machine using Spring Boot.
   I decided to have 3 main classes: **Clients** (for displaying names so things could be more personal), **Accounts** (the main object from our functionalities) and **Roles** (because clients can be **normal users** and have the basic functionalities described above or they can de **admins** and have extra functionalities: deleting accounts, clients, selecting data about them and so on).
   
   Considering the **database** I used a MySQL server with a pre-populated database. To **map the Java persistent objects to  I used *Hibernate***.
-  ![GitHub Logo](/Capture.png)
+  
+  ![GitHub Logo](/Capture.PNG)
   
    Another **important thing to mention** is that I decided to have an **username and password login** for taking advantage of existing tools (***Spring Security***
 ) and as a proof of concept. In a **real case scenario**, I think that all the data were transmitted through **the magnetic stripe of the card**.
