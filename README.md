@@ -32,4 +32,4 @@ Basic ATM Machine using Spring Boot.
         return accounts.stream().map(account -> new SimplifiedAccount(account.getIBAN(), account.getAmount(), account.getClient())).collect(Collectors.toList());
     }
   ```
-   (In *BankController.java* class)
+   (In *BankController.java* class) 
