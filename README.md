@@ -41,6 +41,8 @@ Basic ATM Machine using Spring Boot.
   ```
    (In *BankController.java* class) 
    
+   Another **Java 8 feature** used was ***Optional*** class, that is a container object which may or may not contain a non-null value.
+   
    For testing I **created 2 profiles**:
    1. A ***production profile*** that includes client's login
    2. A ***testing profile*** for testing easily our requests
