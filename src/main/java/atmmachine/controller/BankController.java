@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -60,8 +61,8 @@ public class BankController {
     // basic functions with the classes (for admin user)
 
     @PostMapping("/clients/add")
-    public Client addClient(@RequestBody Client client) {
-        return clientService.saveClient(client);
+    public ResponseEntity<Client> addClient(@RequestBody Client client) {
+        return ResponseEntity.ok(clientService.saveClient(client));
     }
 
     @GetMapping(value = "/clients", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -82,6 +83,20 @@ public class BankController {
         return clients.stream().filter(client -> client.getClientId() == id).findFirst();
     }
 
+    @GetMapping(value = "/accounts/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BankAccount> findAccountById(@PathVariable int id){
+
+//        List<BankAccount> accounts = accountService.getAccounts();
+//        return accounts.stream().filter(account -> account.getAccountId() == id).findFirst();
+        Optional<BankAccount> product = Optional.ofNullable(accountService.getAccountById(id));
+
+        if (!product.isPresent()) {
+            logger.error("Product with id " + id + " does not exist.");
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(product.get());
+    }
+
     @DeleteMapping("/deleteClient/{id}")
     public String deleteClient(@PathVariable int id) {
         return clientService.deleteClient(id);
@@ -91,6 +106,11 @@ public class BankController {
     public List<SimplifiedAccount> getAccounts() {
         List<BankAccount> accounts =  accountService.getAccounts();
         return accounts.stream().map(account -> new SimplifiedAccount(account.getIBAN(), account.getAmount(), account.getClient())).collect(Collectors.toList());
+    }
+
+    @GetMapping("/simplifiedAccounts")
+    public List<SimplifiedAccount> getSimplifiedccounts() {
+       return accountService.getAccountsSimplified();
     }
 
     @DeleteMapping("/deleteAccount/{id}")

@@ -20,10 +20,9 @@ public class AccountDetailsService implements UserDetailsService {
 
     @Autowired
     BankAccountDAO repository;
+
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
-
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

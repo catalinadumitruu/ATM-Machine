@@ -4,11 +4,13 @@ import atmmachine.DAO.BankAccountDAO;
 import atmmachine.DAO.ClientDAO;
 import atmmachine.model.BankAccount;
 import atmmachine.model.Client;
+import atmmachine.model.SimplifiedAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -73,6 +75,22 @@ public class BankService<T> {
         }
     }
 
+    public List<SimplifiedAccount> getAccountsSimplified() {
+
+        try{
+            List<BankAccount> list = accountDAO.findAll();
+            List<SimplifiedAccount> simplifiedAccounts = new ArrayList<>();
+
+            for(BankAccount account : list) {
+                simplifiedAccounts.add(new SimplifiedAccount(account.getIBAN(), account.getAmount(), account.getClient()));
+            }
+            return simplifiedAccounts;
+        } catch (Exception e) {
+            logger.error("Couldn't get accounts");
+            return null;
+        }
+    }
+
     public String deleteAccounts(int id) {
 
         try{
@@ -81,6 +99,16 @@ public class BankService<T> {
         } catch (Exception e) {
             logger.error("Account with id {} couldn't be delete. Error message: {}", id, e.getMessage());
             return "Something went wrong. Account was not deleted.";
+        }
+    }
+
+    public BankAccount getAccountById(int id) {
+
+        try{
+            return accountDAO.findById(id).orElse(null);
+        }catch(Exception e) {
+            logger.error("Couldn't get account with id {}", id);
+            return null;
         }
     }
 
