@@ -6,19 +6,19 @@ Basic ATM Machine using Spring Boot.
 
    When I first started developing this app the first steps were analyzing the main functionalities. For visual representation I chose to use an UML behavioral diagram which is represented through **Use Case Diagram**:
 
-![GitHub Logo](/usecaseDiagram.jpg)
+![GitHub Logo](/screenshots/usecaseDiagram.jpg)
 
   As it can be seen a client can *login, deposit money, check the available amount of money* or *pull cash out of the account and logout*. These were the basic functionalities I wanted to implement.
 
   After this I started developing a short **Class Diagram** which allowed me to get a bigger picture of the project structure:
 
-![GitHub Logo](/ClassDiagram_ATM_Machine.jpg)
+![GitHub Logo](/screenshots/ClassDiagram_ATM_Machine.jpg)
 
   I decided to have 3 main classes: **Clients** (for displaying names so things could be more personal), **Accounts** (the main object from our functionalities) and **Roles** (because clients can be **normal users** and have the basic functionalities described above or they can de **admins** and have extra functionalities: deleting accounts, clients, selecting data about them and so on).
   
   Considering the **database** I used a MySQL server with a pre-populated database. To **map the Java persistent objects to the database I used *Hibernate***.
   
-  ![GitHub Logo](/Capture.PNG)
+  ![GitHub Logo](/screenshots/Capture.PNG)
   
    Another **important thing to mention** is that I decided to have an **username and password login** for taking advantage of existing tools (***Spring Security***
 ) and as a proof of concept. In a **real case scenario**, I think that all the data were transmitted through **the magnetic stripe of the card**.
