@@ -27,7 +27,6 @@ import static org.hamcrest.Matchers.*;
 @ContextConfiguration(classes = ATM_Machine.class)
 public class ATMMachine_IT {
 
-
     private static BankAccount account1;
     private static BankAccount account2;
     private static BankAccount account3;
