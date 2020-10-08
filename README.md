@@ -45,7 +45,7 @@ Basic ATM Machine using Spring Boot.
    1. A ***production profile*** that includes client's login
    2. A ***testing profile*** for testing easily our requests
    
-   I teste all the operations for Clients and Accounts controllers and also the connection to * http:localhost8080/** *
+   I teste all the operations for Clients and Accounts controllers and also the connection to * http:localhost8080/... *
    
    
    
