@@ -16,7 +16,7 @@
         <springboot-starter-test>2.3.3.RELEASE</springboot-starter-test>
         <lombok.version>1.18.12</lombok.version>
         <starter-data-jpa>2.3.4.RELEASE</starter-data-jpa>
-        <jackson-databind>2.10.3</jackson-databind>
+        <jackson-databind>2.10.5.1</jackson-databind>
         <mysql-connector>8.0.17</mysql-connector>
         <spring-context>5.2.4.RELEASE</spring-context>
         <tomcat>9.0.35</tomcat>
